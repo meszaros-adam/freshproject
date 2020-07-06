@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
 
 class PostsController extends Controller
 {
@@ -17,9 +18,11 @@ class PostsController extends Controller
         //     abort(404, 'Sorry, that post was not found.');
         // }
 
-        $post = \DB::table('posts')->where('slug', $slug)->first();
         //dd($post); //dump & die
-        return view('post', ['post' => $post
+        /*if( !$post ) {
+            abort(404);
+        }*/
+        return view('post', ['post' => Post::where('slug', $slug)->firstOrFail()
         ]);
     }
 }
