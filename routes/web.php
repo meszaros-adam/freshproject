@@ -50,3 +50,6 @@ Route::get('/articles', 'ArticlesController@index');
 
 Route::post('/articles', 'ArticlesController@store');
 
+Route::get('/articles/{article}/edit', 'ArticlesController@edit');
+
+Route::put('/articles/{article}', 'ArticlesController@update');
