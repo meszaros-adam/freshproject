@@ -7,6 +7,14 @@ use App\Article;
 
 class ArticlesController extends Controller{
 
+    public function validateArticle(){
+        return request()->validate([
+        'title' => 'required',
+        'excerpt' => 'required',
+        'body' => 'required'
+        ]);
+    }
+
     public function show(Article $foobar){
         //$article = Article::findOrFail($id);
         //return view('articles.show', ['article'=>$article]);
@@ -23,16 +31,25 @@ class ArticlesController extends Controller{
     }
 
     public function store(){
-        request()->validate([
+
+        /*$validateAttributes = request()->validate([
             'title' => 'required',
             'excerpt' => 'required',
             'body' => 'required'
-            ]);            
-        $article = new Article();
-        $article->title = request('title');
-        $article->excerpt = request('excerpt');
-        $article->body = request('body');
-        $article->save();           
+            ]);*/
+            //return $validateAttributes;
+        
+        /*Article::create([
+            'title' => request('title'),
+            'excerpt' => request('excerpt'),
+            'body' => request('body')
+            ]);*/
+            
+        //Article::create($validateAttributes);
+
+        Article::create($this->validateArticle());
+            
+                       
         return redirect('/articles');
     }
 
@@ -42,11 +59,10 @@ class ArticlesController extends Controller{
     }
 
     public function update($id){
-        $article = Article::findOrFail($id);
-        $article->title = request('title');
-        $article->excerpt = request('excerpt');
-        $article->body = request('body');
-        $article->save();
+        
+        $article->update($this.validateArticle);
+            
+        
         return redirect('/articles/' . $article->id);
     }
 
