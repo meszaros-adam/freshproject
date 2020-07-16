@@ -44,7 +44,7 @@ Route::get('/about', function (){
 
 Route::get('/articles/create', 'ArticlesController@create');
 
-Route::get('/articles/{article}', 'ArticlesController@show');
+Route::get('/articles/{foobar}', 'ArticlesController@show');
 
 Route::get('/articles', 'ArticlesController@index');
 
