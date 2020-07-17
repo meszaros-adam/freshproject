@@ -15,14 +15,16 @@ class ArticlesController extends Controller{
         ]);
     }
 
-    public function show(Article $foobar){
+    public function show(Article $article){
         //$article = Article::findOrFail($id);
         //return view('articles.show', ['article'=>$article]);
-        return $foobar;
+        return $article;
     }
 
     public function index(){
+
         $articles=Article::latest()->get();
+
         return view('articles.index', ['articles' => $articles]);
     }
 
@@ -54,16 +56,17 @@ class ArticlesController extends Controller{
     }
 
     public function edit($id){
+
         $article = Article::findOrFail($id);
+
         return view('articles.edit', compact('article'));
     }
 
-    public function update($id){
+    public function update(Article $article){
         
-        $article->update($this.validateArticle);
-            
-        
-        return redirect('/articles/' . $article->id);
+        $article->update($this->validateArticle());
+                  
+        return redirect($article->path());
     }
 
 
