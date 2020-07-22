@@ -11,6 +11,21 @@
 <h1 class="heading has-text-weight-bold is-size-4">New Article</h1>
 <form action="/articles" method="post"> 
             @csrf
+
+            <div class="field">
+                <label class="label" for="tags">Tags</label>
+                <div class="select is-multiple control">
+                <select multiple name="tags[]" id="tag">
+                @foreach($tags as $tag)
+                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                @endforeach
+                </select>
+                @error('tags')
+                <p class="help is-danger">{{ $message }}</p>
+                @enderror
+                </div>
+            </div>
+
             <div class="field">
                 <label class="label" for="title">Title</label>
  
